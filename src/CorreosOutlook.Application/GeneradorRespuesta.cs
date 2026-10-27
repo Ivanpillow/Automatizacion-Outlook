@@ -73,8 +73,14 @@ public sealed class GeneradorRespuesta(ConfiguracionEvento config, Politicas pol
         var texto = motor.Render(plantillas.LeerCuerpo(p), v).Trim();
         if (string.IsNullOrWhiteSpace(texto) || string.IsNullOrWhiteSpace(asunto))
             throw new ValidacionException("La respuesta no puede estar vacía.");
-        var html = "<html><body><div style=\"white-space:pre-wrap;font-family:Arial,sans-serif\">"
-            + WebUtility.HtmlEncode(texto) + "</div></body></html>";
+        var parrafos = texto.Replace("\r\n", "\n").Split("\n\n", StringSplitOptions.RemoveEmptyEntries)
+            .Select(parrafo => "<p style=\"margin:0 0 18px;line-height:1.65\">"
+                + WebUtility.HtmlEncode(parrafo.Trim()).Replace("\n", "<br>") + "</p>");
+        var html = "<html><body style=\"margin:0;padding:24px;background:#f6f8fb\">"
+            + "<div style=\"max-width:680px;margin:auto;padding:32px;background:#ffffff;"
+            + "border:1px solid #e1e9f0;border-top:5px solid #266290;border-radius:12px;"
+            + "font:16px Arial,sans-serif;color:#223041\">"
+            + string.Concat(parrafos) + "</div></body></html>";
         return new(solicitud.Mensaje.Id, p.Id, asunto, texto, html, p.PuedeCrearBorrador, true);
     }
 }

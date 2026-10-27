@@ -7,6 +7,54 @@ namespace CorreosOutlook.Tests;
 
 public class BandejaPreregistrosTests
 {
+    private sealed class CorreoEnviable(OutlookSimulado demo) : ICorreoBandeja, IEnvioBandeja
+    {
+        public string Origen => demo.Origen;
+        public int Solicitudes { get; private set; }
+        public IReadOnlyList<Mensaje> ObtenerMensajesDisponibles() => demo.ObtenerMensajesDisponibles();
+        public Borrador CrearBorrador(Mensaje mensaje, VistaPrevia vista, bool revisionConfirmada) => demo.CrearBorrador(mensaje, vista, revisionConfirmada);
+        public Borrador CrearBorradorConClave(Mensaje mensaje, VistaPrevia vista, string operacionId) => demo.CrearBorradorConClave(mensaje, vista, operacionId);
+        public Borrador? BuscarBorrador(string operacionId) => demo.BuscarBorrador(operacionId);
+        public EvidenciaEnvio? ConsultarRespuestaEnviada(string mensajeId) => demo.ConsultarRespuestaEnviada(mensajeId);
+        public void ValidarBorrador(string mensajeId, string operacionId)
+        {
+            if (demo.BuscarBorrador(operacionId)?.MensajeId != mensajeId) throw new ValidacionException("Borrador incorrecto.");
+        }
+        public void EnviarBorrador(string mensajeId, string operacionId)
+        {
+            ValidarBorrador(mensajeId, operacionId);
+            Solicitudes++;
+            var recibido = demo.ObtenerMensajesDisponibles().Single(m => m.Id == mensajeId).Recibido;
+            demo.SimularRespuestaEnviada(mensajeId, recibido.AddMinutes(1));
+        }
+    }
+    [Fact]
+    public void LoteDeDiezSoloEnviaBorradoresConfirmadosUnaVez()
+    {
+        var (original, demo, repo, archivo) = Preparar();
+        try
+        {
+            for (int i = 1; i < 10; i++)
+                demo.AgregarMensajeFicticio(new($"lote-{i}", Fixtures.Config.Evento.Cuenta,
+                    $"cliente{i}@example.invalid", $"Persona {i}", "Pre-registro Comprador", Fixtures.Fecha(18), "Consulta ficticia", false));
+            var correo = new CorreoEnviable(demo);
+            var servicio = new BandejaPreregistros(Fixtures.Config.Evento, Config(), repo, correo, Fixtures.Generador(), Fixtures.Plantillas());
+            servicio.ActualizarAcumulado();
+            Assert.Equal(10, servicio.Listar().Count);
+            foreach (var caso in servicio.Listar())
+            {
+                var revision = servicio.PrepararRevision(caso.Id, Fixtures.Fecha(18));
+                servicio.ConfirmarGeneral(revision, true, true, Fixtures.Fecha(18));
+                Assert.True(servicio.CrearBorradorConfirmado(caso.Id, Fixtures.Fecha(18)).Creado);
+                Assert.True(servicio.EnviarBorradorConfirmado(caso.Id).Enviado);
+                Assert.False(servicio.EnviarBorradorConfirmado(caso.Id).Enviado);
+            }
+            Assert.Equal(10, correo.Solicitudes);
+            servicio.ActualizarAcumulado();
+            Assert.All(servicio.Listar(), caso => Assert.Equal(EstadoPreregistro.Respondido, caso.Estado));
+        }
+        finally { File.Delete(archivo); }
+    }
     private static ConfiguracionBandeja Config() => ConfiguracionJson.CargarBandeja(Path.Combine(AppContext.BaseDirectory,"config","bandeja.json"));
     private static (BandejaPreregistros Servicio, OutlookSimulado Correo, PreregistroSqlite Repo, string Archivo) Preparar()
     {

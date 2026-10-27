@@ -53,26 +53,31 @@ public sealed class MainForm : Form
         outlook = new(evento.Cuenta); fechas = new(evento);
         generador = new(evento, politicas, new MotorScriban(), plantillas);
         Text = "Expo Joya · Asistente de correo";
-        Size = new Size(1120, 820); MinimumSize = new Size(920, 650); StartPosition = FormStartPosition.CenterScreen;
+        Size = new Size(1240, 840); MinimumSize = new Size(960, 680); StartPosition = FormStartPosition.CenterScreen;
         Font = new Font("Segoe UI", 10); AutoScaleMode = AutoScaleMode.Dpi;
-        BackColor = Color.FromArgb(247, 248, 250);
-        var baseLayout = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 3, ColumnCount = 1, Padding = new Padding(14) };
+        BackColor = VisualStyle.Background;
+        var baseLayout = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 3, ColumnCount = 1, Padding = new Padding(22, 16, 22, 12) };
         baseLayout.RowStyles.Add(new(SizeType.AutoSize)); baseLayout.RowStyles.Add(new(SizeType.Percent, 100)); baseLayout.RowStyles.Add(new(SizeType.AutoSize));
-        baseLayout.Controls.Add(new Label { Text = "Pre-registros: revise respuestas y cree borradores desde el acumulado. La aplicación nunca envía correos.",
-            AutoSize = true, ForeColor = Color.DarkSlateBlue, Padding = new Padding(0, 0, 0, 12) });
+        var encabezado = new TableLayoutPanel { AutoSize = true, Dock = DockStyle.Fill, RowCount = 2, ColumnCount = 1, Margin = new Padding(0, 0, 0, 12) };
+        encabezado.Controls.Add(new Label { Text = "Expo Joya  /  Bandeja de entrada", AutoSize = true,
+            Font = new Font("Segoe UI Semibold", 19), ForeColor = VisualStyle.Ink });
+        encabezado.Controls.Add(new Label { Text = "Clasifique los mensajes, revise cada respuesta y conecte Outlook clásico para enviar los borradores confirmados.",
+            AutoSize = true, ForeColor = VisualStyle.Muted, Margin = new Padding(2, 3, 0, 0) });
+        baseLayout.Controls.Add(encabezado);
+        status.ForeColor = VisualStyle.Muted;
+        status.Padding = new Padding(3, 9, 0, 0);
         baseLayout.Controls.Add(tabs); baseLayout.Controls.Add(status); Controls.Add(baseLayout);
         idioma.Items.AddRange(["es", "en"]); idioma.SelectedIndex = 0;
         plantilla.DataSource = plantillas.Catalogo.Where(p => p.Disponible).ToArray();
         tipo.DataSource = plantillas.Catalogo.Take(27).ToArray(); tipo.DisplayMember = nameof(Plantilla.Nombre);
         fecha.Value = fechas.HoraLocal(DateTimeOffset.Now);
-        ConstruirCorreo(); ConstruirRespuesta(); ConstruirReglas();
         bandeja = new(evento, configBandeja, politicas, plantillas, outlook, preregistros, directorioDatos);
-        var tabBandeja = new TabPage("4 · Acumulado de pre-registros");
+        var tabBandeja = new TabPage("Bandeja de entrada") { BackColor = VisualStyle.Background };
         tabBandeja.Controls.Add(bandeja); tabs.TabPages.Add(tabBandeja);
-        tabs.TabPages[0].Text = "Correo individual · simulación";
-        tabs.TabPages[1].Text = "Respuesta individual · simulación";
-        tabs.TabPages[2].Text = "Comprobar reglas";
-        tabBandeja.Text = "Pre-registros";
+        ConstruirCorreo(); ConstruirRespuesta(); ConstruirReglas();
+        tabs.TabPages[1].Text = "Correo individual · demo";
+        tabs.TabPages[2].Text = "Respuesta · demo";
+        tabs.TabPages[3].Text = "Comprobar reglas";
         tabs.SelectedTab = tabBandeja;
         mensajes.DisplayMember = nameof(Mensaje.Asunto); mensajes.DataSource = outlook.ObtenerMensajesDisponibles();
         mensajes.SelectedIndexChanged += (_, _) => CargarMensaje();
@@ -97,6 +102,7 @@ public sealed class MainForm : Form
         revisado.CheckedChanged += (_, _) => crear.Enabled = revisado.Checked && vista is not null;
         crear.Click += (_, _) => Ejecutar(CrearBorrador);
         CargarMensaje();
+        VisualStyle.Apply(this);
     }
 
     private static ComboBox Combo() => new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 400, DropDownWidth = 520 };
@@ -108,8 +114,9 @@ public sealed class MainForm : Form
     { var b = new Button { Text = text, AutoSize = true, Padding = new Padding(6) }; b.Click += (_, _) => click(); return b; }
     private TableLayoutPanel Pagina(string nombre)
     {
-        var page = new TabPage(nombre) { AutoScroll = true, Padding = new Padding(14), BackColor = Color.White };
-        var grid = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 2, Padding = new Padding(4) };
+        var page = new TabPage(nombre) { AutoScroll = true, Padding = new Padding(16), BackColor = VisualStyle.Background };
+        var grid = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 2, Padding = new Padding(20), BackColor = VisualStyle.Surface };
+        VisualStyle.RoundCard(grid);
         grid.ColumnStyles.Add(new(SizeType.Absolute, 200)); grid.ColumnStyles.Add(new(SizeType.Percent, 100));
         page.Controls.Add(grid); tabs.TabPages.Add(page); return grid;
     }
@@ -130,7 +137,7 @@ public sealed class MainForm : Form
         Fila(g, "Fecha de evaluación\n(hora del evento)", fecha);
         Fila(g, "Idioma", idioma); Fila(g, "Perfil solicitado", perfil); Fila(g, "Tipo de solicitud", tipo);
         Fila(g, "Etapa", etapa); Fila(g, "Estado en registros\n(selección manual)", estado);
-        Fila(g, "Siguiente paso", Boton("Preparar respuesta →", () => tabs.SelectedIndex = 1));
+        Fila(g, "Siguiente paso", Boton("Preparar respuesta →", () => tabs.SelectedIndex = 2));
     }
     private void ConstruirRespuesta()
     {

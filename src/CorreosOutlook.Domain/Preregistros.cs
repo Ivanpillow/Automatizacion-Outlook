@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace CorreosOutlook.Domain;
 
-public enum EstadoPreregistro { Pendiente, ConfirmadoGeneral, RevisionIndividual, CreandoBorrador, BorradorCreado, ErrorRevision, Respondido }
+public enum EstadoPreregistro { Pendiente, ConfirmadoGeneral, RevisionIndividual, CreandoBorrador, BorradorCreado, ErrorRevision, Respondido, EnvioSolicitado }
 public sealed record ReglaPreregistro(string PrefijoAsunto, Perfil Perfil, string PlantillaGeneral, string PlantillaPosterior);
 public sealed record ConfiguracionBandeja(int IntervaloActualizacionSegundos, ReglaPreregistro[] Reglas);
 public sealed record Preregistro(string Id, string Origen, string EventoId, string MensajeId, DateTimeOffset Recibido,

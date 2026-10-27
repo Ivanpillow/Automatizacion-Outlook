@@ -1,6 +1,6 @@
 # Correos Outlook · Expo Joya
 
-Aplicación de escritorio en C# / .NET 8 / Windows Forms para asistir la atención de correos. Incluye simulación y una bandeja de pre-registros que puede leer una cuenta y carpeta elegidas del perfil de Outlook clásico. Después de revisar cada respuesta, puede crear borradores individuales o en lote. No envía correos.
+Aplicación de escritorio en C# / .NET 8 / Windows Forms para asistir la atención de correos. Incluye simulación y una bandeja de pre-registros que puede leer una cuenta y carpeta elegidas del perfil de Outlook clásico. Después de revisar cada respuesta, puede crear borradores individuales o en lote y solicitar su envío desde la cuenta conectada, previa confirmación de la lista de destinatarios. La simulación no envía correos reales.
 
 ## Inicio
 
@@ -15,7 +15,7 @@ Seleccionar un mensaje ficticio, analizarlo y aplicar la sugerencia si procede. 
 
 La sección de reglas permite comprobar documentos y acompañantes introducidos manualmente. Un resultado documental favorable sólo indica que cumple criterios conocidos: nunca es una autorización. Ningún adjunto se abre.
 
-La pestaña «Pre-registros» detecta los dos asuntos configurados en `config/bandeja.json`, guarda su acumulado en SQLite y ofrece revisión de la respuesta general, atención individual y lote de borradores. Puede optar por crear el borrador al confirmar cada respuesta. Un borrador sigue pendiente; sólo una respuesta verificada en Enviados lo retira del acumulado. Consulte [BANDEJA_PREREGISTROS.md](docs/BANDEJA_PREREGISTROS.md). En la simulación hay ejemplos ficticios; con Outlook se consulta el perfil instalado, sin abrir `.ost` ni `.pst` directamente.
+La pestaña «Bandeja de entrada» detecta los dos asuntos configurados en `config/bandeja.json`, guarda su acumulado en SQLite y ofrece revisión de la respuesta general, atención individual y lote de borradores. Puede optar por crear el borrador al confirmar cada respuesta. El botón «Crear y enviar respuestas confirmadas» solicita a Outlook el envío de los casos revisados; sólo una respuesta verificada en Enviados los retira del acumulado. Consulte [BANDEJA_PREREGISTROS.md](docs/BANDEJA_PREREGISTROS.md). En la simulación hay ejemplos ficticios; con Outlook se consulta el perfil instalado, sin abrir `.ost` ni `.pst` directamente.
 
 ón de Outlook real.
 

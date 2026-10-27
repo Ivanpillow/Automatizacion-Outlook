@@ -9,7 +9,7 @@ namespace CorreosOutlook.Infrastructure;
 public sealed record CuentaOutlook(string Correo, string Tipo, IReadOnlyList<string> Carpetas);
 
 /// <summary>Usa el perfil abierto de Outlook clásico. Todas las llamadas se ejecutan desde el hilo STA de WinForms.</summary>
-public sealed class OutlookClasico : ICorreoBandeja
+public sealed class OutlookClasico : ICorreoBandeja, IEnvioBandeja
 {
     private const string IdInternet = "http://schemas.microsoft.com/mapi/proptag/0x1035001F";
     private const string IdRespuesta = "http://schemas.microsoft.com/mapi/proptag/0x1042001F";
@@ -156,10 +156,17 @@ public sealed class OutlookClasico : ICorreoBandeja
         propiedad.Value = operacionId;
         dynamic origen = respuesta.UserProperties.Add("ExpoJoyaMensaje", 1, false);
         origen.Value = mensaje.Id;
+        dynamic destinatario = respuesta.UserProperties.Add("ExpoJoyaDestinatario", 1, false);
+        destinatario.Value = mensaje.Remitente;
         respuesta.Save();
         dynamic carpetaBorradores = almacen.GetDefaultFolder(16);
         if ((string)respuesta.Parent.EntryID != (string)carpetaBorradores.EntryID)
             respuesta = respuesta.Move(carpetaBorradores);
+        dynamic huellaHtml = respuesta.UserProperties.Add("ExpoJoyaHtmlHash", 1, false);
+        huellaHtml.Value = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes((string)respuesta.HTMLBody)));
+        dynamic asuntoGuardado = respuesta.UserProperties.Add("ExpoJoyaAsunto", 1, false);
+        asuntoGuardado.Value = (string)respuesta.Subject;
+        respuesta.Save();
         string nuevoId = (string)respuesta.EntryID;
         var creado = new Borrador(Guid.NewGuid(), mensaje.Id, (string)respuesta.Subject, (string)respuesta.HTMLBody, false)
         {
@@ -167,6 +174,54 @@ public sealed class OutlookClasico : ICorreoBandeja
         };
         cacheBorradores[operacionId] = creado;
         return creado;
+    }
+    public void ValidarBorrador(string mensajeId, string operacionId) => ObtenerBorradorValido(mensajeId, operacionId);
+    private dynamic ObtenerBorradorValido(string mensajeId, string operacionId)
+    {
+        if (!cache.TryGetValue(mensajeId, out var mensaje))
+            throw new ValidacionException("El mensaje original ya no está disponible. Actualice la bandeja.");
+        var borrador = BuscarBorrador(operacionId);
+        if (borrador?.OutlookEntryId is null || borrador.MensajeId != mensajeId)
+            throw new ValidacionException("No se encontró el borrador confirmado.");
+        dynamic respuesta = sesion.GetItemFromID(borrador.OutlookEntryId, (string)almacen.StoreID);
+        dynamic carpetaBorradores = almacen.GetDefaultFolder(16);
+        if ((int)respuesta.Class != 43 || (bool)respuesta.Sent
+            || (string)respuesta.Parent.EntryID != (string)carpetaBorradores.EntryID)
+            throw new ValidacionException("El borrador cambió de estado. Actualice antes de enviar.");
+        string? Marca(string nombre)
+        {
+            dynamic valor = respuesta.UserProperties.Find(nombre);
+            return valor is null ? null : (string)valor.Value;
+        }
+        if (Marca("ExpoJoyaOperacion") != operacionId || Marca("ExpoJoyaMensaje") != mensajeId
+            || !string.Equals(Marca("ExpoJoyaDestinatario"), mensaje.Remitente, StringComparison.OrdinalIgnoreCase))
+            throw new ValidacionException("El borrador no corresponde al mensaje y destinatario confirmados.");
+        string htmlActual = (string)respuesta.HTMLBody;
+        string huellaActual = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(htmlActual)));
+        if (Marca("ExpoJoyaHtmlHash") != huellaActual)
+            throw new ValidacionException("El contenido del borrador cambió. Revíselo en Outlook antes de enviarlo.");
+        if (Marca("ExpoJoyaAsunto") != (string)respuesta.Subject)
+            throw new ValidacionException("El asunto del borrador cambió. Revíselo en Outlook antes de enviarlo.");
+        if ((int)respuesta.Recipients.Count != 1)
+            throw new ValidacionException("El borrador debe tener exactamente un destinatario.");
+        dynamic receptor = respuesta.Recipients.Item(1);
+        string direccion = (string)receptor.Address;
+        if (!string.Equals(direccion, mensaje.Remitente, StringComparison.OrdinalIgnoreCase))
+        {
+            try { direccion = (string)receptor.AddressEntry.GetExchangeUser().PrimarySmtpAddress; }
+            catch (COMException) { throw new ValidacionException("No se pudo comprobar la dirección del destinatario."); }
+        }
+        if (!string.Equals(direccion, mensaje.Remitente, StringComparison.OrdinalIgnoreCase))
+            throw new ValidacionException("El destinatario del borrador cambió.");
+        return respuesta;
+    }
+    public void EnviarBorrador(string mensajeId, string operacionId)
+    {
+        dynamic respuesta = ObtenerBorradorValido(mensajeId, operacionId);
+        respuesta.SendUsingAccount = cuentaCom;
+        respuesta.Send();
+        cacheBorradores.Remove(operacionId);
+        enviadosLeidos = false;
     }
     public Borrador? BuscarBorrador(string operacionId)
     {

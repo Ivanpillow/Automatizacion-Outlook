@@ -22,6 +22,7 @@ public interface ICorreoBandeja : IOutlookService
 }
 public sealed record RevisionGeneral(string CasoId, int Version, Mensaje Mensaje, VistaPrevia Vista, string Huella, string Nombre);
 public sealed record ResultadoBorrador(bool Creado, string Mensaje);
+public sealed record ResultadoEnvio(bool Enviado, string Mensaje);
 
 public sealed class BandejaPreregistros(ConfiguracionEvento evento, ConfiguracionBandeja configuracion,
     IPreregistroRepository repository, ICorreoBandeja correo, GeneradorRespuesta generador, IPlantillasRepository plantillas)
@@ -173,4 +174,34 @@ public sealed class BandejaPreregistros(ConfiguracionEvento evento, Configuracio
             return new(false, "Resultado incierto. Actualice y revise el caso; no se reintentará automáticamente.");
         }
     }
+
+    public ResultadoEnvio EnviarBorradorConfirmado(string id)
+    {
+        var caso = ObtenerCaso(id);
+        if (caso.Estado != EstadoPreregistro.BorradorCreado || caso.OperacionId is null)
+            return new(false, "Omitido: el caso no tiene un borrador confirmado pendiente.");
+        if (correo is not IEnvioBandeja envio)
+            return new(false, "El envío directo requiere Outlook clásico conectado.");
+        var previo = correo.ConsultarRespuestaEnviada(caso.MensajeId);
+        if (previo is { Enviado: true })
+        {
+            ActualizarAcumulado();
+            return new(false, "Omitido: Outlook ya registra una respuesta enviada.");
+        }
+        var borrador = correo.BuscarBorrador(caso.OperacionId);
+        if (borrador is null || borrador.MensajeId != caso.MensajeId)
+            return new(false, "No se encontró el borrador esperado. Actualice y revise el caso.");
+        envio.ValidarBorrador(caso.MensajeId, caso.OperacionId);
+        if (!repository.Actualizar(caso with { Estado = EstadoPreregistro.EnvioSolicitado }, caso.Version))
+            return new(false, "El caso cambió. Actualice la bandeja antes de enviar.");
+        // No se reintenta una llamada Send con resultado incierto. La conciliación se hace en Enviados.
+        envio.EnviarBorrador(caso.MensajeId, caso.OperacionId);
+        return new(true, "Envío solicitado a Outlook. Confirme el estado en Enviados.");
+    }
+}
+
+public interface IEnvioBandeja
+{
+    void ValidarBorrador(string mensajeId, string operacionId);
+    void EnviarBorrador(string mensajeId, string operacionId);
 }

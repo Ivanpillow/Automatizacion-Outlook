@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="690" viewBox="0 0 1120 690">
+  <rect width="1120" height="690" fill="#f6f8fb"/>
+  <g font-family="Segoe UI,Arial,sans-serif" fill="#223041">
+    <text x="48" y="58" font-size="26" font-weight="700">Expo Joya / Bandeja de entrada</text>
+    <text x="48" y="85" font-size="14" fill="#5d6c7d">Revise cada respuesta. Conecte Outlook clásico para enviar los borradores confirmados.</text>
+    <rect x="48" y="108" width="1024" height="47" rx="12" fill="#e9f0f6"/>
+    <text x="68" y="138" font-size="14">Bandeja de entrada</text>
+    <text x="258" y="138" font-size="14" fill="#5d6c7d">Correo individual · demo</text>
+    <text x="476" y="138" font-size="14" fill="#5d6c7d">Respuesta · demo</text>
+    <text x="646" y="138" font-size="14" fill="#5d6c7d">Comprobar reglas</text>
+    <text x="48" y="190" font-size="14" fill="#5d6c7d">1 Seleccione un correo    →    2 Revise la respuesta    →    3 Cree el borrador    →    4 Envíe desde Outlook</text>
+    <text x="48" y="225" font-size="14" font-weight="600" fill="#266290">OUTLOOK CLÁSICO · Cuenta y carpeta seleccionadas</text>
+    <text x="48" y="254" font-size="15" font-weight="600">Pendientes 10     Confirmados 10     Borradores 0     Envío solicitado 0     Respondidos 0</text>
+    <rect x="48" y="276" width="225" height="38" rx="10" fill="#fff" stroke="#cfdae5"/>
+    <text x="64" y="300" font-size="14">Categoría: Todas</text>
+    <rect x="292" y="276" width="220" height="38" rx="10" fill="#fff" stroke="#cfdae5"/>
+    <text x="308" y="300" font-size="14">Estado: Todos</text>
+    <text x="543" y="300" font-size="14">□ Incluir respondidos</text>
+    <rect x="48" y="332" width="1024" height="225" rx="12" fill="#fff"/>
+    <rect x="48" y="332" width="1024" height="42" rx="12" fill="#e9f0f6"/>
+    <text x="68" y="359" font-size="14" font-weight="600">Categoría</text>
+    <text x="275" y="359" font-size="14" font-weight="600">Estado</text>
+    <text x="483" y="359" font-size="14" font-weight="600">Asunto</text>
+    <text x="897" y="359" font-size="14" font-weight="600">Recibido</text>
+    <rect x="53" y="379" width="1014" height="48" rx="8" fill="#d9eaf7"/>
+    <text x="68" y="408" font-size="14">Comprador</text><text x="275" y="408" font-size="14" fill="#266290">Confirmado</text><text x="483" y="408" font-size="14">Pre-registro Comprador</text><text x="897" y="408" font-size="14">18/01 10:00</text>
+    <text x="68" y="456" font-size="14">Emprendedor</text><text x="275" y="456" font-size="14" fill="#266290">Confirmado</text><text x="483" y="456" font-size="14">Pre-registro Emprendedor</text><text x="897" y="456" font-size="14">18/01 10:03</text>
+    <text x="68" y="507" font-size="14">Comprador</text><text x="275" y="507" font-size="14" fill="#936023">Pendiente</text><text x="483" y="507" font-size="14">Pre-registro Comprador</text><text x="897" y="507" font-size="14">18/01 10:08</text>
+    <rect x="48" y="580" width="162" height="44" rx="11" fill="#fff" stroke="#cfdae5"/><text x="68" y="608" font-size="14">Revisar respuesta</text>
+    <rect x="222" y="580" width="194" height="44" rx="11" fill="#fff" stroke="#cfdae5"/><text x="242" y="608" font-size="14">Crear borradores</text>
+    <rect x="428" y="580" width="311" height="44" rx="11" fill="#266290"/><text x="448" y="608" font-size="14" fill="#fff">Crear y enviar confirmados</text>
+    <text x="48" y="659" font-size="12" fill="#5d6c7d">Maqueta representativa · no es captura de la aplicación ejecutada</text>
+  </g>
+</svg>
