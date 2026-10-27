@@ -1,0 +1,595 @@
+[
+  {
+    "id": "informacion-general",
+    "nombre": "Información general del evento",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante"
+    ],
+    "asunto": "{{ evento }} — Información general del evento",
+    "archivoCuerpo": "es/general.sbn",
+    "variablesObligatorias": [
+      "nombre"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": true,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true
+  },
+  {
+    "id": "acompanantes-permitidos",
+    "nombre": "Acompañantes permitidos",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Acompañantes permitidos",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "comprador-requisitos",
+    "nombre": "Comprador nuevo: solicitar requisitos",
+    "idioma": "es",
+    "perfil": "Comprador",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante"
+    ],
+    "asunto": "{{ evento }} — Comprador nuevo: solicitar requisitos",
+    "archivoCuerpo": "es/comprador.sbn",
+    "variablesObligatorias": [
+      "nombre"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true,
+    "permiteLoteGeneral": true
+  },
+  {
+    "id": "comprador-registrado",
+    "nombre": "Comprador ya registrado",
+    "idioma": "es",
+    "perfil": "Comprador",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Comprador ya registrado",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "emprendedor-requisitos",
+    "nombre": "Emprendedor: solicitar información y requisitos",
+    "idioma": "es",
+    "perfil": "Emprendedor",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante"
+    ],
+    "asunto": "{{ evento }} — Emprendedor: solicitar información y requisitos",
+    "archivoCuerpo": "es/emprendedor.sbn",
+    "variablesObligatorias": [
+      "nombre"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true,
+    "permiteLoteGeneral": true
+  },
+  {
+    "id": "acompanante-encontrado",
+    "nombre": "Acompañante que continuará como acompañante",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante"
+    ],
+    "asunto": "{{ evento }} — Acompañante que continuará como acompañante",
+    "archivoCuerpo": "es/acompanante.sbn",
+    "variablesObligatorias": [
+      "nombre",
+      "titular"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": false,
+    "disponible": true
+  },
+  {
+    "id": "acompanante-cambio-comprador",
+    "nombre": "Acompañante que solicita cambio a comprador",
+    "idioma": "es",
+    "perfil": "Comprador",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Acompañante que solicita cambio a comprador",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "acompanante-cambio-emprendedor",
+    "nombre": "Acompañante que solicita cambio a emprendedor",
+    "idioma": "es",
+    "perfil": "Emprendedor",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Acompañante que solicita cambio a emprendedor",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "confirmacion-acompanantes",
+    "nombre": "Confirmación de un acompañante registrado",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante"
+    ],
+    "asunto": "{{ evento }} — Confirmación de un acompañante registrado",
+    "archivoCuerpo": "es/confirmacion.sbn",
+    "variablesObligatorias": [
+      "nombre",
+      "nombres_acompanantes"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": false,
+    "disponible": true
+  },
+  {
+    "id": "confirmacion-dos-acompanantes",
+    "nombre": "Confirmación de dos acompañantes registrados",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Confirmación de dos acompañantes registrados",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "maximo-acompanantes",
+    "nombre": "Máximo de acompañantes alcanzado",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Máximo de acompañantes alcanzado",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "internacional-documentos",
+    "nombre": "Internacional: solicitar documentos",
+    "idioma": "es",
+    "perfil": "Internacional",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Internacional: solicitar documentos",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "internacional-folio",
+    "nombre": "Internacional: folio asignado",
+    "idioma": "es",
+    "perfil": "Internacional",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Internacional: folio asignado",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": true,
+    "disponible": false
+  },
+  {
+    "id": "folio-asignado",
+    "nombre": "Folio de registro asignado",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Folio de registro asignado",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": true,
+    "disponible": false
+  },
+  {
+    "id": "gafete-no-recibido",
+    "nombre": "Gafete no recibido",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Gafete no recibido",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "semana-comprador",
+    "nombre": "Semana del evento: comprador",
+    "idioma": "es",
+    "perfil": "Comprador",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Semana del evento: comprador",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "semana-emprendedor",
+    "nombre": "Semana del evento: emprendedor",
+    "idioma": "es",
+    "perfil": "Emprendedor",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Semana del evento: emprendedor",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "visa",
+    "nombre": "Solicitud de visa",
+    "idioma": "es",
+    "perfil": "Internacional",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Solicitud de visa",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "informacion-insuficiente",
+    "nombre": "Información insuficiente",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Información insuficiente",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "acceso-no-autorizado",
+    "nombre": "Acceso no autorizado",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Acceso no autorizado",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": true,
+    "disponible": false
+  },
+  {
+    "id": "vendedor-distribuidor",
+    "nombre": "Perfil de vendedor o distribuidor",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Perfil de vendedor o distribuidor",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "casa-empeno",
+    "nombre": "Casa de empeño no autorizada",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Casa de empeño no autorizada",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": true,
+    "representaAprobacionORechazo": true,
+    "disponible": false
+  },
+  {
+    "id": "expositor",
+    "nombre": "Persona interesada en ser expositora",
+    "idioma": "es",
+    "perfil": "Expositor",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Persona interesada en ser expositora",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "posterior-evento",
+    "nombre": "Consulta no atendida durante el evento",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Consulta no atendida durante el evento",
+    "archivoCuerpo": "es/posterior.sbn",
+    "variablesObligatorias": [
+      "nombre"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true,
+    "permiteLoteGeneral": true
+  },
+  {
+    "id": "preregistro-tardio",
+    "nombre": "Pre-registro recibido después del evento",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Pre-registro recibido después del evento",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "recibido",
+    "nombre": "Confirmación simple de recibido",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Confirmación simple de recibido",
+    "archivoCuerpo": null,
+    "variablesObligatorias": [],
+    "requiereRevision": true,
+    "puedeCrearBorrador": false,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": false
+  },
+  {
+    "id": "personalizada",
+    "nombre": "Respuesta personalizada",
+    "idioma": "es",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante",
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Respuesta personalizada",
+    "archivoCuerpo": "es/personalizada.sbn",
+    "variablesObligatorias": [
+      "respuesta_manual"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true
+  },
+  {
+    "id": "informacion-general-en",
+    "nombre": "Event information",
+    "idioma": "en",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Previo",
+      "Durante"
+    ],
+    "asunto": "{{ evento }} — Event information",
+    "archivoCuerpo": "en/general.sbn",
+    "variablesObligatorias": [
+      "nombre"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": true,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true
+  },
+  {
+    "id": "posterior-en",
+    "nombre": "Unanswered event enquiry",
+    "idioma": "en",
+    "perfil": "Otro",
+    "etapasPermitidas": [
+      "Despues"
+    ],
+    "asunto": "{{ evento }} — Unanswered event enquiry",
+    "archivoCuerpo": "en/posterior.sbn",
+    "variablesObligatorias": [
+      "nombre"
+    ],
+    "requiereRevision": true,
+    "puedeCrearBorrador": true,
+    "elegibleAutoenvioFuturo": false,
+    "requiereConsultaBaseDatos": false,
+    "representaAprobacionORechazo": false,
+    "disponible": true
+  }
+]

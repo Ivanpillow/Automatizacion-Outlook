@@ -1,0 +1,10 @@
+Hola {{ nombre }}:
+
+Gracias por su interés en {{ evento }}.
+
+{{ requisitos_comprador }}
+
+{{ texto_documentacion }}
+
+Puede iniciar su pre-registro en {{ registro_url }}.
+La autorización está sujeta a revisión humana de la documentación.

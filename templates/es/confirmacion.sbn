@@ -1,0 +1,8 @@
+Hola {{ nombre }}:
+
+Conforme a la confirmación manual de los datos, sus acompañantes registrados son:
+{{ nombres_acompanantes }}.
+
+{{ texto_cupo }}
+
+{{ acompanantes_reglas }}

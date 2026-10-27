@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><ProjectReference Include="../CorreosOutlook.Domain/CorreosOutlook.Domain.csproj" /></ItemGroup>
+</Project>

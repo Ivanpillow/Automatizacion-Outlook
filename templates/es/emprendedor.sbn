@@ -1,0 +1,9 @@
+Hola {{ nombre }}:
+
+Gracias por su interés en {{ evento }}.
+
+{{ requisitos_emprendedor }}
+
+{{ texto_documentacion }}
+
+Esta respuesta solicita información para revisión; no confirma un registro ni asigna un número.

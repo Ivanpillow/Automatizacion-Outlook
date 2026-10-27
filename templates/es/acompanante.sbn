@@ -1,0 +1,22 @@
+Hola {{ nombre }}:
+
+De acuerdo con los datos revisados, actualmente aparece como acompañante de {{ titular }}.
+Si continúa como acompañante, no necesita hacer un nuevo registro. Puede solicitar la reimpresión de su gafete durante el evento e ingresar con la persona titular.
+
+{{ if accion == "SolicitarComprador" }}
+Para solicitar el cambio a comprador:
+{{ requisitos_comprador }}
+{{ texto_documentacion }}
+El cambio requiere revisión y no se encuentra autorizado por esta respuesta.
+{{ else if accion == "SolicitarEmprendedor" }}
+Para solicitar el cambio a emprendedor:
+{{ requisitos_emprendedor }}
+{{ texto_documentacion }}
+El cambio requiere revisión manual.
+{{ else if accion == "CorregirTitular" }}
+Por favor confirme los datos de la persona titular para que podamos revisarlos manualmente.
+{{ else if accion == "RevisionManual" }}
+Su caso requiere revisión manual antes de confirmar cualquier cambio.
+{{ else }}
+¿Desea continuar como acompañante o solicitar un cambio de perfil a comprador o emprendedor?
+{{ end }}

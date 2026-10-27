@@ -1,0 +1,7 @@
+{
+  "intervaloActualizacionSegundos": 30,
+  "reglas": [
+    { "prefijoAsunto": "Pre-registro Comprador", "perfil": "Comprador", "plantillaGeneral": "comprador-requisitos", "plantillaPosterior": "posterior-evento" },
+    { "prefijoAsunto": "Pre-registro Emprendedor Expo Joya", "perfil": "Emprendedor", "plantillaGeneral": "emprendedor-requisitos", "plantillaPosterior": "posterior-evento" }
+  ]
+}

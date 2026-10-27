@@ -1,0 +1,11 @@
+Hola {{ nombre }}:
+
+Le compartimos información de {{ evento }}.
+Inicio: {{ inicio }}.
+Final: {{ fin }}.
+Sede: {{ recinto }}, {{ ciudad }}, {{ estado }}.
+Registro para compradores: {{ registro_url }}
+
+{{ acompanantes_reglas }}
+
+Para dudas, puede escribir a {{ correo }}.

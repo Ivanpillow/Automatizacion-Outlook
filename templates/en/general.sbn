@@ -1,0 +1,11 @@
+Hello {{ nombre }},
+
+Thank you for your interest in {{ evento }}.
+Start: {{ inicio }}.
+End: {{ fin }}.
+Venue: {{ recinto }}, {{ ciudad }}, {{ estado }}.
+Buyer registration: {{ registro_url }}
+
+{{ acompanantes_reglas }}
+
+For further information, please contact {{ correo }}.

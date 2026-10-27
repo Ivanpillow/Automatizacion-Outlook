@@ -1,0 +1,7 @@
+Hola {{ nombre }}:
+
+Lamentamos no haber atendido su consulta oportunamente debido a las actividades del evento.
+
+{{ texto_documentacion }}
+
+Será un gusto atenderle en la siguiente edición.

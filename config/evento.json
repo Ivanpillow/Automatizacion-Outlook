@@ -1,0 +1,16 @@
+{
+  "cuenta": "contacto@expojoya.com.mx",
+  "zonaHoraria": "America/Mexico_City",
+  "registroCompradorUrl": "https://expojoya.com.mx/registro-comprador",
+  "actual": {
+    "id": "enero-2027", "nombre": "Expo Joya Enero 2027",
+    "inicio": "2027-01-26", "fin": "2027-01-28",
+    "limiteDocumentacionLocal": "2027-01-19T12:00:00",
+    "recinto": "World Trade Center", "ciudad": "Ciudad de México", "estado": "CDMX"
+  },
+  "siguiente": {
+    "id": "abril-2027", "nombre": "Expo Joya Abril 2027",
+    "inicio": null, "fin": null, "limiteDocumentacionLocal": null,
+    "recinto": "Expo Guadalajara", "ciudad": "Guadalajara", "estado": "Jalisco"
+  }
+}

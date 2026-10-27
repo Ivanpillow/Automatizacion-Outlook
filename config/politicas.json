@@ -1,0 +1,47 @@
+{
+  "documentos": {
+    "identificacionObligatoria": true,
+    "antiguedadMaximaMeses": 6,
+    "compradorMinimoMxn": 10000,
+    "emprendedorMinimoMxn": null,
+    "evidenciasAdicionalesEmprendedor": ["Página web", "Página de Instagram", "Evidencia de ventas", "Evidencia adicional de compras"]
+  },
+  "acompanantes": {
+    "maximo": 2, "edadMinima": 12,
+    "identificacionesMenores": ["CURP", "Pasaporte", "Credencial escolar"]
+  },
+  "internacional": {
+    "facturaMinimaUsd": 1000,
+    "modalidadRequisitos": null,
+    "requisitos": ["Pasaporte", "Factura de compra", "Registro legal del negocio", "Sitio web", "Tarjeta de presentación"],
+    "politicaConfirmada": false
+  },
+  "textos": {
+    "es": {
+      "AntesDelLimite": "Favor de enviar la documentación por correo electrónico a más tardar el {{ fecha_limite }} antes de las {{ hora_limite }}.",
+      "LimiteFinalizado": "La recepción de documentos por correo electrónico ha finalizado. Deberá presentar la documentación directamente durante el evento en el área de registro para su revisión y autorización.",
+      "DuranteEvento": "Deberá presentar la documentación directamente en el área de registro del evento. La autorización estará sujeta a la revisión presencial.",
+      "DespuesEvento": "El evento ha finalizado. Le invitamos a {{ siguiente_evento }} en {{ siguiente_recinto }}, {{ siguiente_ciudad }}. {{ siguientes_fechas }}",
+      "fechas_pendientes": "Las fechas exactas están pendientes de confirmación.",
+      "requisitos_comprador": "Es obligatoria una identificación oficial vigente con fotografía y al menos UNO de estos requisitos: constancia de situación fiscal con actividad preponderante afín a joyería; notas membretadas o facturas válidas; o invitación personalizada de un expositor con su nombre. Si utiliza notas o facturas, deben estar a su nombre, corresponder a joyería o actividad relacionada, tener máximo {{ antiguedad_meses }} meses y sumar al menos {{ comprador_minimo }} MXN. No es necesario presentar las tres alternativas.",
+      "requisitos_emprendedor": "Es obligatoria una identificación oficial vigente con fotografía (INE). Si presenta CSF con actividad afín, invitación personalizada de un expositor o notas válidas por al menos {{ comprador_minimo }} MXN, corresponde revisar su caso como comprador. Si sólo presenta notas de compras por debajo de ese monto, debe aportar evidencia adicional de actividad afín o inicio del negocio, como página web, Instagram, ventas u otras compras, para revisar su caso como emprendedor. Los comprobantes deben tener máximo {{ antiguedad_meses }} meses. Sin evidencia de actividad no se realiza el registro; toda decisión requiere revisión humana. Indique si tiene negocio, productos, función, giro, proveedor o pabellón de interés y rango de inversión. Si estudia diseño de joyería o una carrera afín, puede solicitarse credencial vigente o constancia de estudios.",
+      "acompanantes_reglas": "Cada registro permite hasta {{ maximo_acompanantes }} acompañantes. Deben ingresar con la persona titular, presentar identificación y tener al menos {{ edad_minima }} años. Para menores que cumplan la edad mínima pueden aceptarse, según corresponda: {{ identificaciones_menores }}.",
+      "cupo_uno": "Todavía cuenta con un lugar disponible. Si lo desea, puede registrar al acompañante restante directamente durante el evento.",
+      "cupo_lleno": "Con estos registros se han ocupado los {{ maximo_acompanantes }} lugares disponibles para acompañantes.",
+      "cupo_varios": "Cuenta con {{ disponibles }} lugares disponibles para acompañantes."
+    },
+    "en": {
+      "AntesDelLimite": "Please email your documents no later than {{ fecha_limite }}, before {{ hora_limite }} (event local time).",
+      "LimiteFinalizado": "The deadline for emailing documents has passed. Please present your documents at the event registration area for review and authorization.",
+      "DuranteEvento": "Please present your documents at the event registration area. Authorization is subject to in-person review.",
+      "DespuesEvento": "The event has ended. We invite you to {{ siguiente_evento }} at {{ siguiente_recinto }}, {{ siguiente_ciudad }}. {{ siguientes_fechas }}",
+      "fechas_pendientes": "The exact dates are awaiting confirmation.",
+      "requisitos_comprador": "A valid government-issued photo ID is mandatory, plus at least ONE of: a tax certificate showing a jewelry-related main activity; valid purchase receipts or invoices; or a personalized exhibitor invitation bearing your name. Receipts or invoices must be in your name, relate to jewelry or a related activity, be no older than {{ antiguedad_meses }} months and total at least {{ comprador_minimo }} MXN. All three alternatives are not required.",
+      "requisitos_emprendedor": "A valid government-issued photo ID (INE) is required for this domestic profile. A jewelry-related tax certificate, a personalized exhibitor invitation, or valid purchase receipts totaling at least {{ comprador_minimo }} MXN indicate the buyer profile. With only purchase receipts below that amount, additional evidence of related activity or a new business, such as a website, Instagram page, sales or further purchases, is needed for entrepreneur review. Receipts must be no older than {{ antiguedad_meses }} months. Registration cannot proceed without evidence of activity; a person must review the decision. Please describe your business, products, role, activity, supplier or pavilion of interest and investment range.",
+      "acompanantes_reglas": "Each registration allows up to {{ maximo_acompanantes }} companions, aged {{ edad_minima }} or older, entering with the registration holder and presenting identification. For eligible minors, accepted identification may include: {{ identificaciones_menores }}.",
+      "cupo_uno": "You still have one companion place available. You may register the remaining companion at the event.",
+      "cupo_lleno": "All {{ maximo_acompanantes }} companion places have now been used.",
+      "cupo_varios": "You have {{ disponibles }} companion places available."
+    }
+  }
+}

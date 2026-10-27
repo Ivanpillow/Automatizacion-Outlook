@@ -1,0 +1,7 @@
+Hello {{ nombre }},
+
+We apologize for not responding sooner due to activities during the event.
+
+{{ texto_documentacion }}
+
+We look forward to welcoming you to the next edition.
